@@ -178,10 +178,6 @@ ORDER BY  1
 
 
 
-
-
-
-
 #################################
 #### Cumulative Sum Percent ####
 #################################
@@ -194,13 +190,8 @@ ORDER BY  1
         employee_id,
         case_created_date,
         case_closed_date,
-        DATE_DIFF('day', date(case_created_date), date(case_closed_date)) AS days_to_close
-    FROM d_service_cloud_case_plus
-    WHERE
-        ds = '<LATEST_DS:d_service_cloud_case_plus>'
-        AND origin = 'Web - People Portal'
-        AND case_created_date >= '2022-01-01'
-)
+        ays_to_close
+    FROM table
 
 ,
 prep_2 AS (
