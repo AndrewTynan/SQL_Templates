@@ -179,20 +179,6 @@ ORDER BY  1
 
 
 
-SELECT
-    payload,
-    ELEMENT_AT(CAST(JSON_EXTRACT(payload, '$.path') AS ARRAY<VARCHAR>), 1) AS L1,
-    ELEMENT_AT(CAST(JSON_EXTRACT(payload, '$.path') AS ARRAY<VARCHAR>), 2) AS L2,
-    ELEMENT_AT(CAST(JSON_EXTRACT(payload, '$.path') AS ARRAY<VARCHAR>), 3) AS L3,
-    ELEMENT_AT(CAST(JSON_EXTRACT(payload, '$.path') AS ARRAY<VARCHAR>), 4) AS L4
-FROM people_tools
-WHERE
-    ds = '2023-05-17'
-    AND product_name = 'People Portal'
-    AND (
-        buenopath = 'BanzaiController'
-        AND UPPER(feature_name) = 'PEOPLE_PORTAL_V2_ARTICLE'
-    )
 
 
 
