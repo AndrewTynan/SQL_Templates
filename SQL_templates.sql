@@ -35,6 +35,15 @@ Group by 1
 order by 1
 
 
+--in Presto APPROX_PERCENTILE allows a easier approach 
+ APPROX_PERCENTILE(metric, .1) as first_decile
+,APPROX_PERCENTILE(metric, .25) as first_quartile
+,APPROX_PERCENTILE(metric, .5) as median
+,APPROX_PERCENTILE(metric, .75) as third_quartile 
+,APPROX_PERCENTILE(metric, .9) as ninth_decile 
+,APPROX_PERCENTILE(metric, .97) as ninty_seventh_percentile
+
+
 ######################################
 ##### Mean & Confidence Interval #####
 ######################################
@@ -224,3 +233,18 @@ Select
     ROUND(1. * cumulative_case_count / total_case_count, 3) as cumulative_percent 
     from prep_3 
     Where days_to_close IS NOT NULL -- there is one NULL
+
+
+
+################################
+#### unnest an orderedarray ####
+################################
+
+SELECT
+    ds,
+    nested_field AS pp_urls_visited_list 
+FROM table a
+CROSS JOIN UNNEST(a.nested_field)
+    WITH ORDINALITY AS b (pp_url, visit_order)
+ORDER BY 1,2     
+
