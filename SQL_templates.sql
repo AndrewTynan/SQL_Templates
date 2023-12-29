@@ -43,29 +43,31 @@ order by 1
 
 # Z values: 1.65 for 90%, 1.96 for 95%, 2.33 for 98% and 2.58 for 99%  
 
-CI = avg + 1.96 * (sd / SQRT( sample_size))
+# avg + 1.96 * (sd / SQRT(sample_size)) AS Confidence_Interval_95_perc
 
-    avg + 1.96 * (sd / SQRT(sample_size)) AS Confidence_Interval_95_perc
-
-
-
+WITH cte as ( 
 Select 
-    app_name, 
-    avg(tag_case_rate) avg,
-    STDDEV(tag_case_rate) sd,
-    sqrt(percentage * (1 - percentage)/ total) as se, 
-    count(*) sample_size,
-    From time_away_case_rate_daily_trend 
+    condition, 
+    avg(metric) avg,
+    STDDEV(metric) sd,
+    count(*) sample_size
+    From atpt_question_case_per_1K_FTE 
 group by 1 
+) 
+
+, cte2 as ( 
+Select 
+    *,     
+    avg + 1.96 * (sd / SQRT(sample_size)) AS Confidence_Interval_95_perc
+    from cte 
+) 
 
 Select 
-    app_name, 
-    round(avg,2) as avg_time_away_case_rate, 
-    round(avg - Confidence_Interval_95_perc,2) as _lower_err,
-    round(avg + Confidence_Interval_95_perc,2) as _upper_err,
-    Confidence_Interval_95_perc
-    From prep_2        
-
+    condition, 
+    round(avg, 2) as avg_atpt_question_cases_per_1K_FTE, 
+    round(avg - Confidence_Interval_95_perc, 2) as Lower_Confidence_Interval_95_perc, 
+    round(avg + Confidence_Interval_95_perc, 2) as Upper_Confidence_Interval_95_perc
+    From cte2 
 
 
 -- binomial 
@@ -98,9 +100,7 @@ Select
 
 #################################
 ##### Mean & Standard Error #####
-#################################
-
-# NOTE: the output values for standard error upper and lower are labeled for Daiquery's data explorer 
+################################# 
 
 With prep as ( 
 Select 
@@ -125,6 +125,17 @@ Select
     round(avg_metric - standard_error,2) as _lower_err,
     round(avg_metric + standard_error,2) as _upper_err
     From prep_2
+
+
+-- Alternative method
+Select 
+    app_name, 
+    avg(metric) avg,
+    STDDEV(metric) sd,
+    sqrt(percentage * (1 - percentage)/ total) as se, 
+    count(*) sample_size,
+    From table  
+group by 1 
 
 
 ################################
@@ -182,19 +193,17 @@ ORDER BY  1
 #### Cumulative Sum Percent ####
 #################################
 
+WITH prep AS (
+SELECT
+    case_sfid,
+    employee_id,
+    case_created_date,
+    case_closed_date,
+    ays_to_close
+FROM table
+)
 
-
-    WITH prep AS (
-    SELECT
-        case_sfid,
-        employee_id,
-        case_created_date,
-        case_closed_date,
-        ays_to_close
-    FROM table
-
-,
-prep_2 AS (
+,prep_2 AS (
     SELECT
         days_to_close,
         COUNT(DISTINCT case_sfid) AS case_count
@@ -215,9 +224,3 @@ Select
     ROUND(1. * cumulative_case_count / total_case_count, 3) as cumulative_percent 
     from prep_3 
     Where days_to_close IS NOT NULL -- there is one NULL
-
-
-
-
-
-
