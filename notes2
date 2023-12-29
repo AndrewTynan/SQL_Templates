@@ -1,0 +1,67 @@
+Interpretable ML Techniques
+Accompanying exhibits: Interpretable ML
+
+What influences our decision to use nonparametric / “black-box” algorithms?
+Black box
+Model performance is very important
+Dependent variables are nonlinear and you don’t want to do lots of feature engineering
+Too many independent variables for feature engineering
+Independent variable interaction is significant
+Can naturally handle missing data
+Fully explicable
+Stability of predictions is important
+High signal / low bias / low noise cases
+Disadvantages of black boxes
+Hyperparameter tuning is nontrivial and significantly impacts the model
+Changes in data (population, new variables) can impact the model due to randomness
+Can overweight high cardinality features
+A black box will find relationships between latent variables you might not want to model
+Ex: predicting company quarterly earnings using macroeconomic variables - correlated to a latent feature (time) and there are other indicators of time (e.g. company size)
+Why does explicability matter in the people space specifically?
+Our decisions impact people’s lives and we have a duty to ensure those decisions are made well
+Leaders / decision-makers often have strong priors and validating those increases buy-in
+Model-driven decision-making about people is in its relative infancy and there’s skepticism
+Some relationships in the people space are well-studied and demonstrating that a model captures those relationships increases confidence
+Useful approaches to decide between the two
+Build a linear model and a black box model and measure the relative outperformance
+Linear model isn’t accurate enough to measure the effects with certainty
+
+Okay, now that you’ve decided to use a black box, what now?
+
+Choosing black box algorithms for interpretability
+Bagging (e.g. random forest) vs. Boosting (e.g. xgboost)
+Bagging leads to more “jagged” feature relationships because each model sets its own split and they get averaged together
+Hyperparameters:
+Bayesian optimization is a reasonable approach but can be expensive
+Lots of online tutorials suggest finding the optimal parameter on a sample and using it; better is to find the parameters that perform best across a range of other hyperparameters
+learning rate / penalization
+Depth
+Iterations
+Most of the signal is acquired quickly - compare training at n = 10 vs. n = 100
+Things to watch out for
+Correlated features: evaluating features independently
+Prioritizing high cardinality features: correlated features will generally be represented by their highest cardinality correlated feature
+Models can do weird things when there’s not much data in the range - don’t read into relationships where there isn’t much data (and always plot the distribution)
+Explaining individual features
+PDPs https://christophm.github.io/interpretable-ml-book/pdp.html 
+Averages over the entire prediction range
+Considers the featurespace but not weighted by the actual distribution
+Can include combinations of features that don’t exist in the base data or reality
+ALEs https://christophm.github.io/interpretable-ml-book/ale.html 
+Takes a window function and looks at change in the prediction
+Locally more accurate
+Granularity can be important
+ICEs https://christophm.github.io/interpretable-ml-book/ice.html 
+Useful for understanding the importance of feature interactions
+Always check feature interactions!
+Explaining the model overall
+Feature importance
+Quick check to see if it reflects intuition
+High cardinality features will be more important
+Surrogate models https://christophm.github.io/interpretable-ml-book/global.html 
+Most effective when feature importance is concentrated in a handful of features
+Black box eliminates a lot of the noise
+Gives a holistic overview of what’s happening
+Can be used with different features to understand different aspects of the model
+Need to check the R^2 / AUC to ensure the model is reflective (~30% is at the bottom end of what’s worth using)
+Performs worse as training iterations and depth increase
