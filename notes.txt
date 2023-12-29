@@ -1,0 +1,110 @@
+
+
+coding challenge
+
+	apply logic to working toward a solution 
+
+	mostly joins and aggregations 
+
+	looking for solid logic, including approach and thought process 
+
+	subsetting on specific populations 
+		active in a period, or did a certain action 
+
+	similar as first round
+	more breadth of questions 
+	might build off response to previous question 
+	follow interview prompts > guiding toward follow up question 
+	how do you incorporate the additional info and adapat my approach 
+
+
+Case Study 
+
+analytical reasoning 
+lead conversation with structured apporach 
+broadly scoped product lvel 
+should we double the amount of ads on FB news feed? 
+
+
+analytical execution 
+narrow data level question 
+user input high school name into text field, how do we validate this? 
+create hypotheses, brainstom several, clearly stated to prove / disprove 
+growth enagegmebt and rettnetion not just revenue 
+demonstrating agility, how to I adjust to additional info 
+
+quantitiave analysis
+descriptive stats common distributions, conditional probability 
+what would the curve look like 
+how to calculate the probability
+how to calculate the probability of a set of users seeing an add 
+x number of users would calcualte y number of impressions based z reach 
+
+anakytical reasoning 
+research design
+bigger product context, product makret fit, competitive landscape
+do the users want it, does it aling with mission
+different methods tradeoffs, esp. wrt to designing a roadmap 
+mitigate bias and mitigtae network effect 
+
+staoytelling through data 
+how to combine signals from different sources to make a product recommendation 
+how would you tell that story to a non technical audience 
+
+
+setting goals and success is the same as analytical execution 
+
+behavioral interivew 
+describe a time whrn 
+what work accoplishment are you most proud of 
+time when requirements for a project change in the middle 
+time when something didnt work out, how did you apply to future 
+collaborating with others 
+need to influence with data but not authority 
+being inclusive, getting input from all stakeholders 
+knowing your aduenice, how to change the msg for execs vs intern vs non technical 
+
+
+	
+	open ended business questions, focused on a Meta product 
+
+	ask questions to get context
+
+	structured apporach that is hypothesis driven
+
+	what is the goal, what is trying to be optimized 
+
+	try to aling on mission to create community and bring ppl closer together 
+
+	goals on user growth, engagement, and retention 
+
+	brainstorm different hypotheses - clearly stated, how to prove / disprove 
+
+	metrics: focus on internal data, specify avg, count, sum
+			specify as time bounds
+			specify whether it pertains to a sub-population 
+
+	balanced to note potential positive and negatives, include guardrail 
+
+
+	analytical thinking & analytical doing 
+
+		thinking: considering multiple different approaches or methods that tie back to the hypothesis 
+
+			defining an analytical road map 
+
+		doing: how to operationalize things: what experiments, what analyses 
+
+			enough detail that they can replicate the experiment 
+
+	call out bias, how can we be confident in the results
+		address edge caess 
+
+	not about any one solution, more about how I engage with the problem
+
+	do the goals and metrics make sense, are they tied to the problem
+
+
+
+
+	
